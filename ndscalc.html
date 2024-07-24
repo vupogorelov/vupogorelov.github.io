@@ -44,7 +44,7 @@
             display: flex;
             justify-content: center; /* Центрирование группы радиокнопок */
             gap: 40px; /* Расстояние между радиокнопками */
-            margin-bottom: 20px; /* Добавление отступа между группой радиокнопок и другими элементами */
+            margin-bottom: 1px; /* Добавление отступа между группой радиокнопок и другими элементами */
         }
         .result_calc_value {
             width: 100%;
@@ -90,6 +90,7 @@
     <label class="result_labels">Ставка НДС, %
         <input type="number" id="stav" inputmode="numeric" value="20">
     </label>
+
     <div class='radio-group'>
         <label>
             <input name="rd" type="radio" value="1" checked> Начислить
@@ -98,22 +99,21 @@
             <input name="rd" type="radio" value="2"> Выделить
         </label>
     </div>
+
+    <div id="result">
+        <label class="result_labels">Сумма без НДС:
+            <div id="sum_without_nds" class="result_calc_value"></div>
+        </label>
+        <label class="result_labels">НДС:
+            <div id="nds" class="result_calc_value"></div>
+        </label>
+        <label class="result_labels">Всего:
+            <div id="total_sum" class="result_calc_value"></div>
+        </label>
+    </div>
+
+    <div id="calc_text"></div>
 </form>
-
-<div id="result">
-    <label class="result_labels">Сумма без НДС:
-        <div id="sum_without_nds" class="result_calc_value"></div>
-    </label>
-    <label class="result_labels">НДС:
-        <div id="nds" class="result_calc_value"></div>
-    </label>
-    <label class="result_labels">Всего:
-        <div id="total_sum" class="result_calc_value"></div>
-    </label>
-</div>
-
-<div id="calc_text"></div>
-
 
 <script>
     function okr(a) {
