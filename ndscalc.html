@@ -2,16 +2,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Калькулятор НДС</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            color: white;
+            background-color: #2f2f2f; /* Цвет графит */
             padding: 20px;
             margin: 0;
             box-sizing: border-box;
         }
         form {
             margin-bottom: 20px;
+            text-align: center; /* Центрирование контента в форме */
         }
         input[type="text"], 
         input[type="radio"], 
@@ -24,15 +28,18 @@
             padding: 10px;
             border: 1px solid #333;
             border-radius: 4px;
+            color: #000; /* Черный текст внутри поля ввода */
         }
         label {
             display: flex;
             align-items: center;
+            justify-content: center; /* Центрирование текста внутри label */
             font-weight: bold;
         }
-        label input[type="radio"] {
-            width: auto;
-            margin-right: 10px;
+        .radio-group {
+            display: flex;
+            justify-content: center; /* Центрирование группы радиокнопок */
+            gap: 20px; /* Расстояние между радиокнопками */
         }
         #result {
             margin-top: 20px;
@@ -46,9 +53,8 @@
             input[type="text"] {
                 width: calc(100% - 22px); /* Adjust for padding and border */
             }
-            label {
-                flex-direction: row;
-                justify-content: flex-start;
+            .radio-group {
+                flex-direction: row; /* Радиокнопки в одну линию */
             }
         }
     </style>
@@ -68,13 +74,14 @@
     <input type="text" id="stav" value="20">
     <br>
 
-    <label>
-        <input name="rd" type="radio" value="1" checked> Начислить НДС
-    </label>
-    <br>
-    <label>
-        <input name="rd" type="radio" value="2"> Выделить НДС
-    </label>
+    <div class='radio-group'>
+        <label>
+            <input name="rd" type="radio" value="1" checked> Начислить
+        </label>
+        <label>
+            <input name="rd" type="radio" value="2"> Выделить
+        </label>
+    </div>
 </form>
 
 <div id="result"></div>
