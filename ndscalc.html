@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Калькулятор НДС</title>
+    </head>
+    <body>
+
+        <h2>Калькулятор НДС</h2>
+
+        <label for="amount">Введите сумму:</label>
+        <input type="number" id="amount" step="0.01">
+
+        <label for="vatRate">Ставка НДС (%):</label>
+        <input type="number" id="vatRate" step="0.01">
+
+        <button onclick="calculateVAT()">Вычислить</button>
+
+        <p id="result"></p>
+
+        <script>
+            function calculateVAT() {
+                const amount = parseFloat(document.getElementById('amount').value);
+                const vatRate = parseFloat(document.getElementById('vatRate').value);
+
+                if (isNaN(amount) || isNaN(vatRate)) {
+                    document.getElementById('result').textContent = 'Пожалуйста, введите корректные значения.';
+                    return;
+                }
+
+                const vatAmount = (amount * vatRate) / 100;
+                const totalAmount = amount + vatAmount;
+
+                document.getElementById('result').textContent = `Сумма НДС: ${vatAmount.toFixed(2)}, Всего с НДС: ${totalAmount.toFixed(2)}`;
+            }
+        </script>
+
+    </body>
+</html>
