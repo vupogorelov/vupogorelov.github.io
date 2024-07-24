@@ -21,12 +21,12 @@
             margin-bottom: 20px;
             text-align: center; /* Центрирование контента в форме */
         }
-        input[type="text"], input[type="radio"], label {
+        input[type="number"], input[type="radio"], label {
             width: 100%;
             box-sizing: border-box;
             margin-bottom: 20px; /* Увеличение нижнего отступа элементов */
         }
-        input[type="text"] {
+        input[type="number"] {
             padding: 10px;
             font-size: 1.2em;
             border: 1px solid #0b1014;
@@ -100,11 +100,11 @@
 <form id="form">
     <em>Сумма, руб.</em>
     <br>
-    <input type="text" id="sum" value="">
+    <input type="number" id="sum" inputmode="numeric" value="">
     <br>
     <em>Ставка НДС, %</em>
     <br>
-    <input type="text" id="stav" value="20">
+    <input type="number" id="stav" inputmode="numeric" value="20">
     <br>
 
     <div class='radio-group'>
@@ -148,9 +148,9 @@
         const sum_s = sum + nds;
 
         return {
-            sum_b: `${okr(sum_b)} руб.`,
-            nds: `${okr(nds)} руб.`,
-            sum_s: `${okr(sum_s)} руб.`
+            sum_b: okr(sum_b),
+            nds: okr(nds),
+            sum_s: okr(sum_s)
         };
     }
 
@@ -160,9 +160,9 @@
         const nds = sum_s - sum_b;
 
         return {
-            sum_b: `${okr(sum_b)} руб.`,
-            nds: `${okr(nds)} руб.`,
-            sum_s: `${okr(sum_s)} руб.`
+            sum_b: okr(sum_b),
+            nds: okr(nds),
+            sum_s: okr(sum_s)
         };
     }
 
