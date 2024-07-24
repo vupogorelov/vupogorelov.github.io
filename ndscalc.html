@@ -45,11 +45,21 @@
             gap: 20px; /* Расстояние между радиокнопками */
             margin-bottom: 20px; /* Добавление отступа между группой радиокнопок и другими элементами */
         }
+        .divider {
+            width: 80%;
+            height: 1px;
+            background-color: rgba(55, 93, 119, 0.37); /* Полупрозрачная линия */
+            margin: 20px auto; /* Центрирование и создание отступов */
+        }
         #result {
             margin-top: 20px;
             font-size: 1.2em;
             box-sizing: border-box;
             margin-bottom: 15px; /* Увеличение нижнего отступа элементов */
+            background-color: rgba(23, 33, 43, 0.7); /* Фон на 50% светлее */
+            border-radius: 10px;
+            padding: 15px;
+            font-family: Courier, monospace;
         }
         @media (min-width: 600px) {
             form {
@@ -74,7 +84,6 @@
     <br>
     <input type="text" id="sum" value="">
     <br>
-
     <em>Ставка, %</em>
     <br>
     <input type="text" id="stav" value="20">
@@ -89,6 +98,8 @@
         </label>
     </div>
 </form>
+
+<div class="divider"></div>
 
 <div id="result"></div>
 
@@ -122,7 +133,7 @@
         const nds = sum_s - sum_b;
 
         return `
-            Сумма без НДС:<br><b>${okr(sum_b)} руб.</b><br><br>
+            Сумма без НДС:<br><b>${okr(sum_b)} руб</b><br><br>
             НДС:<br><b>${okr(nds)} руб.</b><br><br>
             Всего:<br><b>${okr(sum_s)} руб.</b>`;
     }
