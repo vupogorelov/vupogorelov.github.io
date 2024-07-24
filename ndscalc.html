@@ -12,23 +12,25 @@
             padding: 20px;
             margin: 0;
             box-sizing: border-box;
+            line-height: 1.6;
+        }
+        h2 {
+            text-align: center;
         }
         form {
             margin-bottom: 20px;
             text-align: center; /* Центрирование контента в форме */
         }
-        input[type="text"], 
-        input[type="radio"], 
-        label {
+        input[type="text"], input[type="radio"], label {
             width: 100%;
             box-sizing: border-box;
-            margin-bottom: 10px;
+            margin-bottom: 15px; /* Увеличение нижнего отступа элементов */
         }
         input[type="text"] {
             padding: 10px;
             border: 1px solid #333;
             border-radius: 4px;
-            color: #000; /* Черный текст внутри поля ввода */
+            color: #000; /* Чёрный текст внутри поля ввода */
         }
         label {
             display: flex;
@@ -40,6 +42,7 @@
             display: flex;
             justify-content: center; /* Центрирование группы радиокнопок */
             gap: 20px; /* Расстояние между радиокнопками */
+            margin-bottom: 20px; /* Добавление отступа между группой радиокнопок и другими элементами */
         }
         #result {
             margin-top: 20px;
