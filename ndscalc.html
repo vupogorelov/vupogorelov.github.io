@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Калькулятор НДС</title>
+    <title></title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,10 +46,11 @@
             margin-bottom: 20px; /* Добавление отступа между группой радиокнопок и другими элементами */
         }
         .divider {
-            width: 80%;
-            height: 1px;
-            background-color: rgba(55, 93, 119, 0.37); /* Полупрозрачная линия */
+            width: 90%;
+            height: 2px;
+            background-color: rgb(116, 132, 143); /* Полупрозрачная линия */
             margin: 20px auto; /* Центрирование и создание отступов */
+            border-radius: 2px;
         }
         #result {
             margin-top: 20px;
@@ -59,7 +60,7 @@
             background-color: rgba(23, 33, 43, 0.7); /* Фон на 50% светлее */
             border-radius: 10px;
             padding: 15px;
-            font-family: Courier, monospace;
+            /* font-family: Courier, monospace; */
         }
         @media (min-width: 600px) {
             form {
@@ -77,14 +78,12 @@
 </head>
 <body>
 
-<h2>Калькулятор НДС</h2>
-
 <form id="form">
     <em>Сумма, руб.</em>
     <br>
     <input type="text" id="sum" value="">
     <br>
-    <em>Ставка, %</em>
+    <em>Ставка НДС, %</em>
     <br>
     <input type="text" id="stav" value="20">
     <br>
@@ -122,9 +121,9 @@
         const sum_s = sum + nds;
 
         return `
-            Сумма без НДС:<br><b>${okr(sum_b)} руб.</b><br><br>
-            НДС:<br><b>${okr(nds)} руб.</b><br><br>
-            Всего:<br><b>${okr(sum_s)} руб.</b>`;
+            Сумма без НДС:<br><code><b>${okr(sum_b)} руб.</b></code><br><br>
+            НДС:<br><code><b>${okr(nds)} руб.</b></code><br><br>
+            Всего:<br><code><b>${okr(sum_s)} руб.</b></code>`;
     }
 
     function nds2(sum, stav) {
@@ -133,9 +132,9 @@
         const nds = sum_s - sum_b;
 
         return `
-            Сумма без НДС:<br><b>${okr(sum_b)} руб</b><br><br>
-            НДС:<br><b>${okr(nds)} руб.</b><br><br>
-            Всего:<br><b>${okr(sum_s)} руб.</b>`;
+        Сумма без НДС:<br><code><b>${okr(sum_b)} руб.</b></code><br><br>
+            НДС:<br><code><b>${okr(nds)} руб.</b></code><br><br>
+            Всего:<br><code><b>${okr(sum_s)} руб.</b></code>`;
     }
 
     function calculate() {
