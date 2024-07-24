@@ -1,40 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Калькулятор НДС</title>
-    </head>
-    <body>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор НДС</title>
+    <style>
+        form {
+            margin-bottom: 20px;
+        }
+        #calc {
+            cursor: pointer;
+            border: 1px solid #333;
+            padding: 5px 10px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
 
-        <h2>Калькулятор НДС</h2>
+<h2>Калькулятор НДС</h2>
 
-        <label for="amount">Введите сумму:</label>
-        <input type="number" id="amount" step="0.01">
+<form id="form">
+    <em>Сумма, руб.</em>
+    <br>
+    <input type="text" id="sum" value="">
+    <br>
 
-        <label for="vatRate">Ставка НДС (%):</label>
-        <input type="number" id="vatRate" step="0.01">
+    <em>Ставка, %</em>
+    <br>
+    <input type="text" id="stav" value="20">
+    <br>
 
-        <button onclick="calculateVAT()">Вычислить</button>
+    <label>
+        <input name="rd" type="radio" value="1" checked> Начислить НДС
+    </label>
+    <br>
+    <label>
+        <input name="rd" type="radio" value="2"> Выделить НДС
+    </label>
+</form>
 
-        <p id="result"></p>
+<div id="calc">Рассчитать</div>
+<div id="result"></div>
 
-        <script>
-            function calculateVAT() {
-                const amount = parseFloat(document.getElementById('amount').value);
-                const vatRate = parseFloat(document.getElementById('vatRate').value);
+<br>
 
-                if (isNaN(amount) || isNaN(vatRate)) {
-                    document.getElementById('result').textContent = 'Пожалуйста, введите корректные значения.';
-                    return;
-                }
+<script>
+    function okr(a) {
+        return Number(Math.abs(a)).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
 
-                const vatAmount = (amount * vatRate) / 100;
-                const totalAmount = amount + vatAmount;
+    function do_c(a) {
+        a = a.replace(/[^0-9,.]/g, '');
+        a = a.replace(',', '.');
+        return parseFloat(a) || 0;
+    }
 
-                document.getElementById('result').textContent = `Сумма НДС: ${vatAmount.toFixed(2)}, Всего с НДС: ${totalAmount.toFixed(2)}`;
-            }
-        </script>
+    function nds1(sum, stav) {
+        const sum_b = sum;
+        const nds = sum * stav / 100;
+        const sum_s = sum + nds;
 
-    </body>
+        return `
+            Сумма без НДС: <b>${okr(sum_b)} руб.</b><br>
+            НДС: <b>${okr(nds)} руб.</b><br>
+            Сумма с НДС: <b>${okr(sum_s)} руб.</b><br>
+        `;
+    }
+
+    function nds2(sum, stav) {
+        const sum_s = sum;
+        const sum_b = sum / (100 + stav) * 100;
+        const nds = sum_s - sum_b;
+
+        return `
+            Сумма без НДС: <b>${okr(sum_b)} руб.</b><br>
+            НДС: <b>${okr(nds)} руб.</b><br>
+            Сумма с НДС: <b>${okr(sum_s)} руб.</b><br>
+        `;
+    }
+
+    document.getElementById('calc').addEventListener('click', function() {
+        const sum = do_c(document.getElementById('sum').value);
+        const stav = do_c(document.getElementById('stav').value);
+        const rd = document.querySelector('input[name="rd"]:checked').value;
+
+        let error = '';
+        if (sum === 0) error += 'Не указана сумма<br>';
+        if (sum > 20000000000) error += 'Слишком большая сумма<br>';
+        if (stav === 0) error += 'Не указана ставка НДС<br>';
+        if (stav > 99) error += 'Некорректная ставка НДС<br>';
+
+        if (error) {
+            document.getElementById('result').innerHTML = error;
+        } else {
+            const result = rd == 1 ? nds1(sum, stav) : nds2(sum, stav);
+            document.getElementById('result').innerHTML = result;
+        }
+    });
+</script>
+
+</body>
 </html>
