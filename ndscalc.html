@@ -185,7 +185,7 @@
     // Функция для копирования текста в буфер обмена
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(() => {
-            alert('Скопировано: ' + text); // Уведомление о том, что текст скопирован
+            // alert('Скопировано: ' + text); // Уведомление о том, что текст скопирован
         }).catch(err => {
             console.error('Ошибка при копировании: ', err);
         });
