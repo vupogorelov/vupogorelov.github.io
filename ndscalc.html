@@ -7,13 +7,6 @@
         form {
             margin-bottom: 20px;
         }
-        #calc {
-            cursor: pointer;
-            border: 1px solid #333;
-            padding: 5px 10px;
-            display: inline-block;
-            margin-top: 10px;
-        }
         #result {
             margin-top: 20px;
         }
@@ -43,7 +36,6 @@
     </label>
 </form>
 
-<div id="calc">Рассчитать</div>
 <div id="result"></div>
 
 <br>
@@ -83,7 +75,7 @@
         `;
     }
 
-    document.getElementById('calc').addEventListener('click', function() {
+    function calculate() {
         const sum = do_c(document.getElementById('sum').value);
         const stav = do_c(document.getElementById('stav').value);
         const rd = document.querySelector('input[name="rd"]:checked').value;
@@ -100,7 +92,16 @@
             const result = rd == 1 ? nds1(sum, stav) : nds2(sum, stav);
             document.getElementById('result').innerHTML = result;
         }
+    }
+
+    document.getElementById('sum').addEventListener('input', calculate);
+    document.getElementById('stav').addEventListener('input', calculate);
+    document.querySelectorAll('input[name="rd"]').forEach(radio => {
+        radio.addEventListener('change', calculate);
     });
+
+    // Инициализация расчета при загрузке страницы
+    document.addEventListener('DOMContentLoaded', calculate);
 </script>
 
 </body>
