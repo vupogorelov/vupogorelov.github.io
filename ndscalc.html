@@ -129,11 +129,13 @@
     function nds1(sum, stav) {
         const sum_b = sum;
         const nds = sum * stav / 100;
-        const nds_txt = `${sum} x ${stav} : 100`;
-
+        const sum_s = sum + nds;
+        const nds_txt = `${sum} + (${sum} x ${stav} : 100)`;
+        
         return {
             sum_b: okr(sum_b),
             nds: okr(nds),
+            sum_s: okr(sum_s),
             nds_txt: nds_txt
         };
     }
@@ -179,6 +181,35 @@
     document.querySelectorAll('input[name="rd"]').forEach(radio => {
         radio.addEventListener('change', calculate);
     });
+
+    // Функция для копирования текста в буфер обмена
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Скопировано: ' + text); // Уведомление о том, что текст скопирован
+        }).catch(err => {
+            console.error('Ошибка при копировании: ', err);
+        });
+    }
+
+    // Заменяем HTML-символы
+    function extractNumber(text) {
+        const cleanedText = text.replace(/&nbsp;/g, ' ') // Удаляем &nbsp;
+        return cleanedText;
+    }
+
+    // Добавление обработчиков событий для элементов
+    document.getElementById('sum_without_nds').addEventListener('click', function() {
+        copyToClipboard(extractNumber(this.innerHTML));
+    });
+
+    document.getElementById('nds').addEventListener('click', function() {
+        copyToClipboard(extractNumber(this.innerHTML));
+    });
+
+    document.getElementById('total_sum').addEventListener('click', function() {
+        copyToClipboard(extractNumber(this.innerHTML));
+    });
+
 
     // Инициализация расчета при загрузке страницы
     document.addEventListener('DOMContentLoaded', calculate);
